@@ -1,0 +1,37 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@700;800;900&display=swap');
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", sans-serif;
+  
+  --color-primary: #5850EC;
+  --color-primary-dark: #4338CA;
+  --color-primary-light: #818CF8;
+  --color-accent: #10B981;
+}
+
+body {
+  @apply font-sans bg-[#F9FAFB] text-slate-900 antialiased;
+}
+
+.grid-bg {
+  background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.route-dash {
+  stroke-dasharray: 8;
+  animation: dash-move 20s linear infinite;
+}
+
+@keyframes dash-move {
+  from { stroke-dashoffset: 1000; }
+  to { stroke-dashoffset: 0; }
+}
