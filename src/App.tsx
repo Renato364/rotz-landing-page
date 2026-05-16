@@ -196,7 +196,7 @@ export default function App() {
                     ))}
                   </div>
                   <p className="text-[10px] sm:text-xs font-bold text-slate-400">
-                    <span className="text-primary">+47 motoristas</span> já solicitaram hoje
+                    <span className="text-slate-500">Acesso restrito</span> apenas para motoristas selecionados
                   </p>
                 </div>
 
