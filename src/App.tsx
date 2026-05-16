@@ -108,10 +108,7 @@ export default function App() {
                 className="w-full h-full object-contain"
               />
             </div>
-            <span className="relative font-display font-black text-xl tracking-tight text-slate-950 uppercase italic inline-block leading-none">
-              Rotz
-              <span className="absolute -bottom-0.5 left-0 w-full h-[3px] bg-red-500 rounded-full" />
-            </span>
+            <span className="font-display font-black text-xl tracking-tight text-slate-950 uppercase italic">Rotz</span>
           </div>
           <div className="hidden sm:flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
