@@ -5,7 +5,7 @@
 
 import { useState, ChangeEvent, FormEvent, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Phone, Mail, User, CheckCircle, ArrowRight, Loader2, Smartphone, MapPin, Navigation, Zap, Fuel, Wrench } from 'lucide-react';
+import { Phone, Mail, User, CheckCircle, ArrowRight, Loader2, Smartphone, MapPin, Navigation, Zap, Fuel, Wrench, Lock } from 'lucide-react';
 import { supabase } from './lib/supabase';
 
 export default function App() {
@@ -108,7 +108,10 @@ export default function App() {
                 className="w-full h-full object-contain"
               />
             </div>
-            <span className="font-display font-black text-xl tracking-tight text-slate-950 uppercase italic">Rotz</span>
+            <span className="relative font-display font-black text-xl tracking-tight text-slate-950 uppercase italic inline-block leading-none">
+              Rotz
+              <span className="absolute -bottom-0.5 left-0 w-full h-[3px] bg-red-500 rounded-full" />
+            </span>
           </div>
           <div className="hidden sm:flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
@@ -154,14 +157,47 @@ export default function App() {
             animate={{ opacity: 1, y: 0 }}
             className="w-full max-w-md mx-auto lg:ml-auto"
           >
-            <div className="bg-white rounded-[2.5rem] shadow-2xl border border-slate-100 overflow-hidden relative">
+            <div className="relative">
+              {/* Urgency badge - fora do overflow-hidden */}
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-20">
+                <motion.div
+                  initial={{ y: -10, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  className="bg-gradient-to-r from-amber-500 to-orange-500 text-white text-[9px] font-black uppercase tracking-[0.2em] px-4 py-1.5 rounded-full shadow-lg shadow-amber-500/30 whitespace-nowrap"
+                >
+                  ⚡ Vagas Limitadas por Cidade
+                </motion.div>
+              </div>
+
+              <div className="bg-white rounded-[2.5rem] shadow-2xl border border-slate-100 overflow-hidden relative">
               {/* Blur accent */}
               <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 blur-3xl -z-10" />
               
-              <div className="px-5 sm:px-10 py-8 sm:py-10">
+              <div className="px-5 sm:px-10 py-8 sm:py-10 pt-10 sm:pt-12">
                 <div className="mb-6 sm:mb-8">
                   <h3 className="text-xl sm:text-2xl font-display font-black text-slate-950 mb-2">Solicitar Convite</h3>
                   <p className="text-xs sm:text-sm font-medium text-slate-400">Entre na lista prioritária e seja o primeiro a otimizar sua rotina.</p>
+                </div>
+
+                {/* Social proof */}
+                <div className="flex items-center gap-3 mb-6 p-3 bg-primary/[0.03] rounded-xl border border-primary/[0.06]">
+                  <div className="flex -space-x-1.5">
+                    {[
+                      'linear-gradient(135deg, #5850EC, #818CF8)',
+                      'linear-gradient(135deg, #10B981, #34D399)',
+                      'linear-gradient(135deg, #F59E0B, #FBBF24)',
+                      'linear-gradient(135deg, #6366F1, #A5B4FC)',
+                    ].map((gradient, i) => (
+                      <div
+                        key={i}
+                        className="w-6 h-6 sm:w-7 sm:h-7 rounded-full border-2 border-white"
+                        style={{ background: gradient }}
+                      />
+                    ))}
+                  </div>
+                  <p className="text-[10px] sm:text-xs font-bold text-slate-400">
+                    <span className="text-primary">+47 motoristas</span> já solicitaram hoje
+                  </p>
                 </div>
 
                 <AnimatePresence mode="wait">
@@ -187,29 +223,29 @@ export default function App() {
                       </button>
                     </motion.div>
                   ) : (
-                    <form onSubmit={handleSubmit} className="space-y-4">
+                    <form onSubmit={handleSubmit} className="space-y-3">
                       <div className="relative group">
                         <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300 group-focus-within:text-primary transition-colors" />
                         <input
                           id="name" name="name" type="text" required placeholder="Nome Completo"
                           value={formData.name} onChange={handleChange}
-                          className="w-full bg-[#F8FAFC] border border-transparent rounded-2xl py-4 pl-12 pr-4 focus:ring-2 focus:ring-primary/10 focus:bg-white focus:border-primary/20 transition-all text-slate-700 placeholder:text-slate-300 font-semibold text-sm"
+                          className="w-full bg-[#F8FAFC] border border-transparent rounded-2xl py-4 pl-12 pr-4 focus:ring-2 focus:ring-primary/10 focus:bg-white focus:border-primary/20 focus:scale-[1.01] transition-all text-slate-700 placeholder:text-slate-300 font-semibold text-sm"
                         />
                       </div>
                       <div className="relative group">
                         <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300 group-focus-within:text-primary transition-colors" />
                         <input
-                          id="email" name="email" type="email" required placeholder="Seu melhor Gmail"
+                          id="email" name="email" type="email" required placeholder="Seu melhor e-mail"
                           value={formData.email} onChange={handleChange}
-                          className="w-full bg-[#F8FAFC] border border-transparent rounded-2xl py-4 pl-12 pr-4 focus:ring-2 focus:ring-primary/10 focus:bg-white focus:border-primary/20 transition-all text-slate-700 placeholder:text-slate-300 font-semibold text-sm"
+                          className="w-full bg-[#F8FAFC] border border-transparent rounded-2xl py-4 pl-12 pr-4 focus:ring-2 focus:ring-primary/10 focus:bg-white focus:border-primary/20 focus:scale-[1.01] transition-all text-slate-700 placeholder:text-slate-300 font-semibold text-sm"
                         />
                       </div>
                       <div className="relative group">
                         <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300 group-focus-within:text-primary transition-colors" />
                         <input
-                          id="phone" name="phone" type="tel" required placeholder="WhatsApp"
+                          id="phone" name="phone" type="tel" required placeholder="WhatsApp com DDD"
                           value={formData.phone} onChange={handleChange}
-                          className="w-full bg-[#F8FAFC] border border-transparent rounded-2xl py-4 pl-12 pr-4 focus:ring-2 focus:ring-primary/10 focus:bg-white focus:border-primary/20 transition-all text-slate-700 placeholder:text-slate-300 font-semibold text-sm"
+                          className="w-full bg-[#F8FAFC] border border-transparent rounded-2xl py-4 pl-12 pr-4 focus:ring-2 focus:ring-primary/10 focus:bg-white focus:border-primary/20 focus:scale-[1.01] transition-all text-slate-700 placeholder:text-slate-300 font-semibold text-sm"
                         />
                       </div>
 
@@ -221,25 +257,31 @@ export default function App() {
                       )}
 
                       <motion.button
-                        whileHover={{ scale: 1.01 }}
-                        whileTap={{ scale: 0.98 }}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.97 }}
                         disabled={status === 'loading'}
-                        className="w-full bg-primary hover:bg-primary-dark text-white font-black uppercase tracking-[0.1em] text-xs py-5 rounded-2xl shadow-xl shadow-primary/20 flex items-center justify-center gap-3 transition-colors disabled:opacity-50 mt-6"
+                        className="w-full bg-gradient-to-r from-primary via-primary-dark to-indigo-700 text-white font-black uppercase tracking-[0.1em] text-xs py-5 rounded-2xl shadow-xl shadow-primary/30 btn-glow flex items-center justify-center gap-3 transition-all disabled:opacity-50 mt-5"
                       >
                         {status === 'loading' ? (
                           <Loader2 className="w-5 h-5 animate-spin" />
                         ) : (
                           <>
                             Quero o Acesso Antecipado
-                            <ArrowRight className="w-4 h-4" />
+                            <ArrowRight className="w-4 h-4 arrow-bounce" />
                           </>
                         )}
                       </motion.button>
-                      <p className="text-center text-[10px] font-bold text-slate-300 uppercase tracking-widest mt-4">Vagas limitadas por cidade</p>
+
+                      {/* Trust signal */}
+                      <div className="flex items-center justify-center gap-1.5 mt-4">
+                        <Lock className="w-3 h-3 text-slate-300" />
+                        <span className="text-[10px] font-bold text-slate-300">Seus dados estão seguros • Sem spam</span>
+                      </div>
                     </form>
                   )}
                 </AnimatePresence>
               </div>
+            </div>
             </div>
           </motion.div>
         </section>
