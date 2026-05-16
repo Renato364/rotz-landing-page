@@ -235,10 +235,13 @@ export default function App() {
                       <div className="relative group">
                         <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300 group-focus-within:text-primary transition-colors" />
                         <input
-                          id="email" name="email" type="email" required placeholder="Seu melhor e-mail"
+                          id="email" name="email" type="email" required placeholder="Seu Gmail da Play Store"
                           value={formData.email} onChange={handleChange}
                           className="w-full bg-[#F8FAFC] border border-transparent rounded-2xl py-4 pl-12 pr-4 focus:ring-2 focus:ring-primary/10 focus:bg-white focus:border-primary/20 focus:scale-[1.01] transition-all text-slate-700 placeholder:text-slate-300 font-semibold text-sm"
                         />
+                        <p className="text-[10px] sm:text-xs text-slate-400 font-medium mt-1.5 ml-1">
+                          Importante: Use o mesmo e-mail cadastrado na sua Google Play Store para liberar o seu download.
+                        </p>
                       </div>
                       <div className="relative group">
                         <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300 group-focus-within:text-primary transition-colors" />
